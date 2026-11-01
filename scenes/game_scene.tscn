@@ -1,0 +1,37 @@
+[gd_scene format=3 uid="uid://b8dpplipg74wl"]
+
+[ext_resource type="PackedScene" uid="uid://bkf4xyd3sraca" path="res://scenes/player.tscn" id="1_w5aja"]
+[ext_resource type="Texture2D" uid="uid://oqywn0t5q5cg" path="res://arts/static_sky.png" id="1_ycayy"]
+[ext_resource type="Script" uid="uid://2ac4uuyapll6" path="res://scenes/player.gd" id="2_onqr8"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_303o8"]
+size = Vector2(625, 20)
+
+[node name="Level" type="Node2D" unique_id=337867437]
+
+[node name="Parallax2D" type="Parallax2D" parent="." unique_id=481226049]
+repeat_size = Vector2(1280, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="Parallax2D" unique_id=493231093]
+position = Vector2(583, 319)
+texture = ExtResource("1_ycayy")
+
+[node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=367421441]
+
+[node name="CharacterBody2D" parent="." unique_id=876498948 instance=ExtResource("1_w5aja")]
+position = Vector2(498, 320)
+script = ExtResource("2_onqr8")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=1295082866]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=1067008334]
+position = Vector2(345, 567)
+scale = Vector2(13.52, 1)
+shape = SubResource("RectangleShape2D_303o8")
+
+[node name="ColorRect" type="ColorRect" parent="StaticBody2D" unique_id=542508965]
+offset_left = 30.0
+offset_top = 557.0
+offset_right = 70.0
+offset_bottom = 597.0
+scale = Vector2(59.84221, 0.6584338)
