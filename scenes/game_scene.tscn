@@ -2,7 +2,9 @@
 
 [ext_resource type="PackedScene" uid="uid://bkf4xyd3sraca" path="res://scenes/player.tscn" id="1_w5aja"]
 [ext_resource type="Texture2D" uid="uid://oqywn0t5q5cg" path="res://arts/static_sky.png" id="1_ycayy"]
-[ext_resource type="Script" uid="uid://2ac4uuyapll6" path="res://scenes/player.gd" id="2_onqr8"]
+[ext_resource type="Texture2D" uid="uid://bconulcqbo6bc" path="res://arts/static_floor.png" id="2_bw6k5"]
+[ext_resource type="AudioStream" uid="uid://d8fajyq0lmp3" path="res://music/nesrality-scottish-folk-song-barbara-allen-99569.mp3" id="5_rurhu"]
+[ext_resource type="Texture2D" uid="uid://33l21ot20wmb" path="res://arts/house.png" id="5_y3j0m"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_303o8"]
 size = Vector2(625, 20)
@@ -10,28 +12,40 @@ size = Vector2(625, 20)
 [node name="Level" type="Node2D" unique_id=337867437]
 
 [node name="Parallax2D" type="Parallax2D" parent="." unique_id=481226049]
+scroll_offset = Vector2(4, -39)
 repeat_size = Vector2(1280, 0)
+repeat_times = 3
 
-[node name="Sprite2D" type="Sprite2D" parent="Parallax2D" unique_id=493231093]
+[node name="Sky" type="Sprite2D" parent="Parallax2D" unique_id=493231093]
+z_index = -2
 position = Vector2(583, 319)
 texture = ExtResource("1_ycayy")
 
-[node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=367421441]
+[node name="Ground" type="Sprite2D" parent="Parallax2D" unique_id=1401526884]
+z_index = 3
+position = Vector2(695, 188)
+scale = Vector2(1.315245, 1.3930681)
+texture = ExtResource("2_bw6k5")
 
-[node name="CharacterBody2D" parent="." unique_id=876498948 instance=ExtResource("1_w5aja")]
-position = Vector2(498, 320)
-script = ExtResource("2_onqr8")
+[node name="Player" parent="." unique_id=876498948 instance=ExtResource("1_w5aja")]
+z_index = 3
+position = Vector2(125, 308)
 
 [node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=1295082866]
+position = Vector2(7, 45)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=1067008334]
+texture_repeat = 2
 position = Vector2(345, 567)
-scale = Vector2(13.52, 1)
+scale = Vector2(24.24969, 1.498483)
 shape = SubResource("RectangleShape2D_303o8")
 
-[node name="ColorRect" type="ColorRect" parent="StaticBody2D" unique_id=542508965]
-offset_left = 30.0
-offset_top = 557.0
-offset_right = 70.0
-offset_bottom = 597.0
-scale = Vector2(59.84221, 0.6584338)
+[node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=367421441]
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=1364342433]
+stream = ExtResource("5_rurhu")
+autoplay = true
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=764405089]
+position = Vector2(1579, 276)
+texture = ExtResource("5_y3j0m")

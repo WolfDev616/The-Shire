@@ -1,10 +1,9 @@
 [gd_scene format=3 uid="uid://bkf4xyd3sraca"]
 
 [ext_resource type="Texture2D" uid="uid://bimtgftuevp52" path="res://arts/main_char_walk_ANIMATION.png" id="1_3vyb7"]
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_3vyb7"]
-atlas = ExtResource("1_3vyb7")
-region = Rect2(0, 0, 128, 128)
+[ext_resource type="Texture2D" uid="uid://cyw0xxmp2x7mr" path="res://arts/main_char_idle_BASE.png" id="1_g2els"]
+[ext_resource type="Script" uid="uid://2ac4uuyapll6" path="res://scripts/player.gd" id="1_qhqgy"]
+[ext_resource type="AudioStream" uid="uid://g56jguhc434l" path="res://music/walkOnGrass2.mp3" id="4_dqkch"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_onqr8"]
 atlas = ExtResource("1_3vyb7")
@@ -30,23 +29,11 @@ region = Rect2(512, 0, 128, 128)
 atlas = ExtResource("1_3vyb7")
 region = Rect2(640, 0, 128, 128)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_b5spy"]
-atlas = ExtResource("1_3vyb7")
-region = Rect2(768, 0, 128, 128)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_utbpp"]
-atlas = ExtResource("1_3vyb7")
-region = Rect2(896, 0, 128, 128)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_mw25s"]
-atlas = ExtResource("1_3vyb7")
-region = Rect2(1024, 0, 128, 128)
-
 [sub_resource type="SpriteFrames" id="SpriteFrames_05hpe"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_3vyb7")
+"texture": ExtResource("1_g2els")
 }],
 "loop": 1,
 "name": &"idle",
@@ -70,34 +57,34 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_kk2rg")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_b5spy")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_utbpp")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_mw25s")
 }],
 "loop": 1,
 "name": &"walk",
-"speed": 8.0
+"speed": 5.0
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_mlf6e"]
 radius = 14.0
 height = 128.0
 
-[node name="CharacterBody2D" type="CharacterBody2D" unique_id=876498948]
+[node name="Player" type="CharacterBody2D" unique_id=876498948]
+script = ExtResource("1_qhqgy")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=126795927]
-position = Vector2(5, 166)
+position = Vector2(-94.20593, 139.79407)
+scale = Vector2(2.2624073, 2.2624073)
 sprite_frames = SubResource("SpriteFrames_05hpe")
-animation = &"idle"
+animation = &"walk"
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1250928822]
+scale = Vector2(1.2984382, 1.2984382)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1867002106]
-position = Vector2(5, 166)
+position = Vector2(-94.20593, 139.79407)
+scale = Vector2(2.2624073, 2.2624073)
 shape = SubResource("CapsuleShape2D_mlf6e")
+
+[node name="PlayerFootsteps" type="AudioStreamPlayer2D" parent="." unique_id=986660624]
+stream = ExtResource("4_dqkch")
+
+[connection signal="frame_changed" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_frame_changed"]

@@ -6,6 +6,7 @@ const JUMP_VELOCITY = -450.0
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
 @onready var anim = $AnimatedSprite2D
+@onready var player_footsteps: AudioStreamPlayer2D = $PlayerFootsteps
 
 func _physics_process(delta):
 	if not is_on_floor():
@@ -27,9 +28,13 @@ func _physics_process(delta):
 		anim.play("idle")
 
 	move_and_slide()
-	print("Velocity: ", velocity)
-	print("Position: ", global_position)
+
 	for i in get_slide_collision_count():
 		var collision = get_slide_collision(i)
-		print("Colliding with: ", collision.get_collider().name)
-		print("Normal: ", collision.get_normal())
+
+
+
+func _on_animated_sprite_2d_frame_changed() -> void:
+	if anim.animation == "walk":
+		if not player_footsteps.playing:
+			player_footsteps.play()

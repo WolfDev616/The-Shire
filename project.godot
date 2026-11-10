@@ -10,10 +10,14 @@ config_version=5
 
 [application]
 
-config/name="Shire"
+config/name="The-Shire"
 run/main_scene="uid://b8dpplipg74wl"
 config/features=PackedStringArray("4.7", "Forward Plus")
 config/icon="res://icon.svg"
+
+[audio]
+
+buses/default_bus_layout="uid://cgcugm267l4oa"
 
 [display]
 
